@@ -6,7 +6,11 @@ class Customer
 {
 public:
 	Customer();
+	Customer(int id, string lastname, string name, string patronymic, string address, long creditCardNumber, int balance);
+	Customer(const Customer& customer);
 	~Customer();
+
+	void print();
 
 private:
 	int id;
@@ -17,5 +21,3 @@ private:
 	int creditCardNumber;
 	int balance;
 };
-// id, прізвище, ім'я, по батькові, адреса, номер кредитної
-// картки, баланс рахунку(кількість грошей)

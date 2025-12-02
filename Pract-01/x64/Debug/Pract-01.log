@@ -1,4 +1,6 @@
 ﻿  Customer.cpp
   main.cpp
+C:\Users\student\Documents\Практична_Перчишин_Мар'ян\-_01\Pract-01\main.cpp(7,99): warning C4305: 'argument': truncation from '__int64' to 'long'
+C:\Users\student\Documents\Практична_Перчишин_Мар'ян\-_01\Pract-01\main.cpp(7,77): warning C4309: 'argument': truncation of constant value
   Generating Code...
-  Pract-01.vcxproj -> C:\Users\student\Documents\Практична_Перчишин_Мар'ян\Pract-01\x64\Debug\Pract-01.exe
+  Pract-01.vcxproj -> C:\Users\student\Documents\Практична_Перчишин_Мар'ян\-_01\Pract-01\x64\Debug\Pract-01.exe
