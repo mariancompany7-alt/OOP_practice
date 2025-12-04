@@ -39,3 +39,11 @@ std::ostream& operator << (std::ostream& os, Customer& customer_0) {
 	os << customer_0.balance << " ";
 	return os;
 }
+
+bool operator == (const Customer& customer_1, const Customer& customer_2) {
+	return (customer_1.id == customer_1.id && customer_1.lastname == customer_2.lastname &&
+		customer_1.name == customer_2.name && customer_1.patronymic == customer_2.patronymic &&
+		customer_1.address == customer_2.address &&
+		customer_1.creditCardNumber == customer_2.creditCardNumber && 
+		customer_1.balance == customer_2.balance);
+}
