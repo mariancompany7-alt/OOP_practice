@@ -28,3 +28,14 @@ std::istream& operator >> (std::istream& is, Customer& customer_0) {
 	is >> customer_0.balance;
 	return is;
 }
+
+std::ostream& operator << (std::ostream& os, Customer& customer_0) {
+	os << customer_0.id << " ";
+	os << customer_0.lastname << " ";
+	os << customer_0.name << " ";
+	os << customer_0.patronymic << " ";
+	os << customer_0.address << " ";
+	os << customer_0.creditCardNumber << " ";
+	os << customer_0.balance << " ";
+	return os;
+}

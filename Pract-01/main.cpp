@@ -11,6 +11,8 @@ int main() {
 
 	cout << "\nInput id, name, lastname, patronymic, address, creditCardNumber, balance: ";
 	std::cin >> customer_0;
+	cout << "\nOutput: ";
+	std::cout << customer_0;
 
 	return 0; 
 }

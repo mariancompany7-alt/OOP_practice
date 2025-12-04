@@ -13,6 +13,7 @@ public:
 	void print();
 
 	friend std::istream& operator >> (std::istream& is, Customer& customer_0);
+	friend std::ostream& operator << (std::ostream& os, Customer& customer_0);
 
 private:
 	int id;
