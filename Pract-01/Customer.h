@@ -12,6 +12,8 @@ public:
 
 	void print();
 
+	friend std::istream& operator >> (std::istream& is, Customer& customer_0);
+
 private:
 	int id;
 	string lastname;

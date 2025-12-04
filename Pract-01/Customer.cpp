@@ -17,3 +17,14 @@ void Customer::print() {
 	cout << this->id << " " << this->lastname << " " <<
 		this->name << " " << this->patronymic << " " << this->address << " " << this->creditCardNumber << " " << this->balance << "$";
 }
+
+std::istream& operator >> (std::istream& is, Customer& customer_0) {
+	is >> customer_0.id;
+	is >> customer_0.lastname;
+	is >> customer_0.name;
+	is >> customer_0.patronymic;
+	is >> customer_0.address;
+	is >> customer_0.creditCardNumber;
+	is >> customer_0.balance;
+	return is;
+}

@@ -6,6 +6,11 @@ int main() {
 	Customer customer_0;
 	Customer customer_1(1, "Perchyshyn", "Marian", "Andriyovich", "Morozenka", 1090234576540987, 1500);
 	Customer customer_2 = customer_1;
+
 	customer_2.print();
-	return 0;
+
+	cout << "\nInput id, name, lastname, patronymic, address, creditCardNumber, balance: ";
+	std::cin >> customer_0;
+
+	return 0; 
 }
