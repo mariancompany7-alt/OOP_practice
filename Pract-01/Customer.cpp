@@ -2,49 +2,39 @@
 #include <iostream>
 using namespace std;
 
-Customer::Customer() : id(0), lastname(""), name(""), patronymic(""), address(""), creditCardNumber(0), balance(0) {}
+Customer::Customer() : Person(), creditCardNumber(0), balance(0) {}
 
-Customer::Customer(int id, string lastname, string name, string patronymic, string address, long creditCardNumber, int balance) : 
-	id(id), lastname(lastname), name(name), patronymic(patronymic), address(address), creditCardNumber(creditCardNumber), balance(balance) {}
+Customer::Customer(int id, string lastname, string name, string patronymic, string address, long creditCardNumber, int balance)
+	: Person(id, lastname, name, patronymic, address), creditCardNumber(creditCardNumber), balance(balance) {}
 
-Customer::Customer(const Customer& customer_1) :
-	id(customer_1.id), lastname(customer_1.lastname), name(customer_1.name), patronymic(customer_1.patronymic), 
-	address(customer_1.address), creditCardNumber(customer_1.creditCardNumber), balance(customer_1.balance) {}
+Customer::Customer(const Customer& customer_1)
+	: Person(customer_1), creditCardNumber(customer_1.creditCardNumber), balance(customer_1.balance) {}
 
 Customer::~Customer() {}
 
 void Customer::print() {
 	cout << "Object (customer_2) ";
-	cout << this->id << " " << this->lastname << " " <<
-		this->name << " " << this->patronymic << " " << this->address << " " << this->creditCardNumber << " " << this->balance << "$";
+	printGeneralInfo();
+	cout << this->creditCardNumber << " " << this->balance << "$";
 }
 
-std::istream& operator >> (std::istream& is, Customer& customer_0) {
-	is >> customer_0.id;
-	is >> customer_0.lastname;
-	is >> customer_0.name;
-	is >> customer_0.patronymic;
-	is >> customer_0.address;
-	is >> customer_0.creditCardNumber;
-	is >> customer_0.balance;
+std::istream& operator >> (std::istream& is, Customer& customer) {
+	is >> (Person&)customer;
+	is >> customer.creditCardNumber;
+	is >> customer.balance;
 	return is;
 }
 
-std::ostream& operator << (std::ostream& os, Customer& customer_0) {
-	os << customer_0.id << " ";
-	os << customer_0.lastname << " ";
-	os << customer_0.name << " ";
-	os << customer_0.patronymic << " ";
-	os << customer_0.address << " ";
-	os << customer_0.creditCardNumber << " ";
-	os << customer_0.balance << "$";
+std::ostream& operator << (std::ostream& os, Customer& customer) {
+	os << (Person&)customer;
+	os << customer.creditCardNumber << " ";
+	os << customer.balance << "$";
 	return os;
 }
 
 bool operator == (const Customer& customer_1, const Customer& customer_2) {
-	return (customer_1.id == customer_1.id && customer_1.lastname == customer_2.lastname &&
-		customer_1.name == customer_2.name && customer_1.patronymic == customer_2.patronymic &&
-		customer_1.address == customer_2.address &&
-		customer_1.creditCardNumber == customer_2.creditCardNumber && 
+
+	return (static_cast<const Person&>(customer_1) == static_cast<const Person&>(customer_2)), 
+		(customer_1.creditCardNumber == customer_2.creditCardNumber &&
 		customer_1.balance == customer_2.balance);
 }

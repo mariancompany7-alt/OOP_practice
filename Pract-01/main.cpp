@@ -1,12 +1,31 @@
 #include "Customer.h"
+#include "Person.h"
+#include "Seller.h"
 #include <iostream>
 using namespace std;
 
 int main() {
-	Customer customer_0;
-	Customer customer_1(1, "Perchyshyn", "Marian", "Andriyovich", "Morozenka", 1090234576540987, 1500);
-	Customer customer_2 = customer_1;
 
+	Person person_1;
+	Person person_2(2, "Ivanov", "Ivan", "Ivanovich", "Lenina");
+	Person person_3 = person_2;
+	person_3.printGeneralInfo();
+
+	cout << "\nInput id, name, lastname, patronymic, address: ";
+	std::cin >> person_2;
+	cout << "\nOutput: ";
+	std::cout << person_2;
+
+	if (person_1 == person_2) {
+		cout << "\nObject (person_1) = object (person_2)";
+	}
+	else {
+		cout << "\nObject (person_1) do not equel object (person_2)";
+	}
+
+	Customer customer_0;
+	Customer customer_1(1, "Perchyshyn", "Marian", "Andriyovich", "Morozenka", 109023457, 1500);
+	Customer customer_2 = customer_1;
 	customer_2.print();
 
 	cout << "\nInput id, name, lastname, patronymic, address, creditCardNumber, balance: ";
@@ -19,6 +38,23 @@ int main() {
 	}
 	else {
 		cout << "\nObject (customer_1) do not equel object (customer_2)";
+	}
+
+	Seller seller_0;
+	Seller seller_1(123456789, "Apples, Bananas", 3, "Petrov", "Petr", "Petrovich", "Kirova");
+	Seller seller_2 = seller_1;
+	seller_2.print();
+
+	cout << "\nInput id, name, lastname, patronymic, address, accountNumber, productList: ";
+	std::cin >> seller_0;
+	cout << "\nOutput: ";
+	std::cout << seller_0;
+
+	if (seller_1 == seller_2) {
+		cout << "\nObject (seller_1) = object (seller_2)";
+	}
+	else {
+		cout << "\nObject (seller_1) do not equel object (seller_2)";
 	}
 
 	return 0; 
