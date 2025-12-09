@@ -14,6 +14,7 @@ Customer::Customer(const Customer& customer_1) :
 Customer::~Customer() {}
 
 void Customer::print() {
+	cout << "Object (customer_2) ";
 	cout << this->id << " " << this->lastname << " " <<
 		this->name << " " << this->patronymic << " " << this->address << " " << this->creditCardNumber << " " << this->balance << "$";
 }
@@ -36,7 +37,7 @@ std::ostream& operator << (std::ostream& os, Customer& customer_0) {
 	os << customer_0.patronymic << " ";
 	os << customer_0.address << " ";
 	os << customer_0.creditCardNumber << " ";
-	os << customer_0.balance << " ";
+	os << customer_0.balance << "$";
 	return os;
 }
 
