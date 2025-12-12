@@ -17,6 +17,8 @@ public:
 	Person(const Person& person_1);
 	~Person();
 
+	virtual void show() = 0;
+
 	void printGeneralInfo();
 
 	friend std::istream& operator >> (std::istream& is, Person& person_1);

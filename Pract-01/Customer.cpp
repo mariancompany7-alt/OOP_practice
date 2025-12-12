@@ -13,7 +13,6 @@ Customer::Customer(const Customer& customer_1)
 Customer::~Customer() {}
 
 void Customer::print() {
-	cout << "Object (customer_2) ";
 	printGeneralInfo();
 	cout << this->creditCardNumber << " " << this->balance << "$";
 }
