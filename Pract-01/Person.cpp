@@ -13,9 +13,7 @@ Person::Person(const Person& person_1) {
 	this->address = person_1.address;
 }
 
-Person::~Person() {}
-
-void Person::printGeneralInfo() {
+void Person::printGeneralInfo() const{
 	cout << this->id << " " << this->lastname << " " << this->name << " " << this->patronymic << " " << this->address << " ";
 }
 

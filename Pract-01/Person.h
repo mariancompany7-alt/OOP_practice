@@ -15,11 +15,12 @@ public:
 	Person();
 	Person(int id, string lastname, string name, string patronymic, string address);
 	Person(const Person& person_1);
-	~Person();
 
 	virtual void show() = 0;
 
-	void printGeneralInfo();
+	virtual ~Person() {}
+
+	void printGeneralInfo() const;
 
 	friend std::istream& operator >> (std::istream& is, Person& person_1);
 	friend std::ostream& operator << (std::ostream& os, Person& person_1);
