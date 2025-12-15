@@ -18,6 +18,7 @@ public:
 
 	void show() override {
 		cout << "Seller class pure virtual method (show) called." << endl;
+		cout << "accountNumber " << this->accountNumber << ", productList: " << this->productList << endl;
 	}
 
 	friend std::istream& operator >> (std::istream& is, Seller& seller_0);
