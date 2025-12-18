@@ -1,0 +1,7 @@
+# Ignore Visual Studio cache and settings
+.vs/
+*.vsidx
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
