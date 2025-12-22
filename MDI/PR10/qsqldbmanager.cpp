@@ -10,6 +10,7 @@ void QsqlDBManager::connectToDataBase() {
 
     if (!db.open()) {
         qDebug("Database connection failed");
+        throw std::runtime_error("Неможливо відкрити файл бази даних!");
     } else {
         qDebug() << "Connected to the database!";
     }

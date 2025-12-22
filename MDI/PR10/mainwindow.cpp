@@ -65,15 +65,22 @@ void MainWindow::on_btnCreateCustomer_clicked() {
 }
 
 void MainWindow::addCustomer(Customer* c) {
-
+    try {
     if (dbManager->insertIntoTable(*c)) {
         customerModel->select();
         QMessageBox::information(this, "Успіх", "Customer успішно додано до БД");
-    } else {
-        QMessageBox::warning(this, "Помилка", "Customer не додано до БД");
     }
+        }
 
+    catch (const std::exception& e) {
+        qCritical() << "Exception caught:" << e.what();
+        QMessageBox::critical(this, "Помилка", e.what());
+    }
+    catch (const std::exception) {
+        qFatal("Unknown error occurred in addCustomer!");
+    }
     delete c;
+
 }
 
 void MainWindow::on_btnCreateSeller_clicked() {
