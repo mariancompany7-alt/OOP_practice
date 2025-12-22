@@ -5,7 +5,10 @@
 #include <QListWidget>
 #include <QDialog>
 #include <QList>
+#include <QSqlTableModel>
+#include <QTableView>
 #include "customer.h"
+#include "qsqldbmanager.h"
 #include "seller.h"
 
 QT_BEGIN_NAMESPACE
@@ -32,14 +35,15 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    QList<Customer*> customers;
-    QList<Seller*> sellers;
+    QsqlDBManager* dbManager;
 
     QDialog *customerListWindow;
-    QListWidget *customerListWidget;
+    QTableView* customerTableView;
+    QSqlTableModel *customerModel;
 
     QDialog *sellerListWindow;
-    QListWidget *sellerListWidget;
+    QTableView* sellerTableView;
+    QSqlTableModel *sellerModel;
 
     void setupListWindows();
 };

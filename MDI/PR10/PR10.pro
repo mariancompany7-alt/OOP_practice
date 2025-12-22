@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,6 +14,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     person.cpp \
+    qsqldbmanager.cpp \
     seller.cpp \
     sellerdialog.cpp
 
@@ -22,6 +23,7 @@ HEADERS += \
     customerdialog.h \
     mainwindow.h \
     person.h \
+    qsqldbmanager.h \
     seller.h \
     sellerdialog.h
 

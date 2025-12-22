@@ -8,28 +8,52 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+
+    dbManager = new QsqlDBManager();
+    dbManager->connectToDataBase();
+    dbManager->createTables();
+
     setupListWindows();
 }
 
 MainWindow::~MainWindow() {
     delete ui;
-    qDeleteAll(customers);
-    qDeleteAll(sellers);
 }
 
 void MainWindow::setupListWindows() {
+
     customerListWindow = new QDialog(this);
-    customerListWindow->setWindowTitle("Customer List");
+    customerListWindow->setWindowTitle("Customer Database");
     QVBoxLayout *l1 = new QVBoxLayout(customerListWindow);
-    customerListWidget = new QListWidget(customerListWindow);
-    l1->addWidget(customerListWidget);
+
+    customerModel = new QSqlTableModel(this, dbManager->getDB());
+    customerModel->setTable("customers");
+    customerModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    customerModel->select();
+
+    customerTableView = new QTableView(customerListWindow);
+    customerTableView->setModel(customerModel);
+    customerTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    customerTableView->resizeColumnsToContents();
+
+    l1->addWidget(customerTableView);
     customerListWindow->resize(600, 400);
 
     sellerListWindow = new QDialog(this);
-    sellerListWindow->setWindowTitle("Seller List");
+    sellerListWindow->setWindowTitle("Seller Database");
     QVBoxLayout *l2 = new QVBoxLayout(sellerListWindow);
-    sellerListWidget = new QListWidget(sellerListWindow);
-    l2->addWidget(sellerListWidget);
+
+    sellerModel = new QSqlTableModel(this, dbManager->getDB());
+    sellerModel->setTable("sellers");
+    sellerModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    sellerModel->select();
+
+    sellerTableView = new QTableView(sellerListWindow);
+    sellerTableView->setModel(sellerModel);
+    sellerTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    sellerTableView->resizeColumnsToContents();
+
+    l2->addWidget(sellerTableView);
     sellerListWindow->resize(600, 400);
 }
 
@@ -41,14 +65,15 @@ void MainWindow::on_btnCreateCustomer_clicked() {
 }
 
 void MainWindow::addCustomer(Customer* c) {
-    for(Customer* existing : std::as_const(customers)) {
-        if (*existing == *c) {
-            QMessageBox::warning(this, "Error", "Duplicate Customer!");
-            return;
-        }
+
+    if (dbManager->insertIntoTable(*c)) {
+        customerModel->select();
+        QMessageBox::information(this, "Успіх", "Customer успішно додано до БД");
+    } else {
+        QMessageBox::warning(this, "Помилка", "Customer не додано до БД");
     }
-    customers.append(c);
-    customerListWidget->addItem(c->getInfo());
+
+    delete c;
 }
 
 void MainWindow::on_btnCreateSeller_clicked() {
@@ -59,28 +84,35 @@ void MainWindow::on_btnCreateSeller_clicked() {
 }
 
 void MainWindow::addSeller(Seller* s) {
-    for(Seller* existing : std::as_const(sellers)) {
-        if (*existing == *s) {
-            QMessageBox::warning(this, "Error", "Duplicate Seller!");
-            return;
-        }
+
+    if (dbManager->insertIntoTable(*s)) {
+        sellerModel->select();
+        QMessageBox::information(this, "Успіх", "Seller успішно додано до БД");
+    } else {
+        QMessageBox::warning(this, "Помилка", "Seller не додано до БД");
     }
-    sellers.append(s);
-    sellerListWidget->addItem(s->getInfo());
+
+    delete s;
 }
 
 void MainWindow::on_btnShowCustomerList_clicked() {
-    if(customerListWindow->isVisible())
+
+    if(customerListWindow->isVisible()) {
         customerListWindow->hide();
-    else
+    } else {
+        customerModel->select();
         customerListWindow->show();
+    }
 }
 
 void MainWindow::on_btnShowSellerList_clicked() {
-    if(sellerListWindow->isVisible())
+
+    if(sellerListWindow->isVisible()) {
         sellerListWindow->hide();
-    else
+    } else {
+        sellerModel->select();
         sellerListWindow->show();
+    }
 }
 
 void MainWindow::on_btnExit_clicked() {

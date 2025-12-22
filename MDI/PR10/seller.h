@@ -13,6 +13,9 @@ public:
 
     QString getInfo() const override;
 
+    long getAccountNumber() const { return accountNumber; }
+    QString getProductList() const { return productList; }
+
     friend istream& operator >> (istream& is, Seller& s);
     friend ostream& operator << (ostream& os, const Seller& s);
     friend bool operator == (const Seller& s1, const Seller& s2);

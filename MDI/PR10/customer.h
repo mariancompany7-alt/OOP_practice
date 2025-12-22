@@ -13,6 +13,9 @@ public:
 
     QString getInfo() const override;
 
+    long getCardNumber() const { return creditCardNumber; }
+    double getBalance() const { return balance; }
+
     friend istream& operator >> (istream& is, Customer& c);
     friend ostream& operator << (ostream& os, const Customer& c);
     friend bool operator == (const Customer& c1, const Customer& c2);
